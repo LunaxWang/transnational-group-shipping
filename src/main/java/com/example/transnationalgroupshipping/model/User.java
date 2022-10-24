@@ -3,21 +3,14 @@ package com.example.transnationalgroupshipping.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "telephone"))
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "telephone"))
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "nickname")
     private String nickname;
-
-    @Column(name = "password")
     private String password;
-
-    @Column(name = "telephone")
     private String telephone;
-
-    @Column(name = "role")
     private String role;
 
     public User(){
