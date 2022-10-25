@@ -36,11 +36,11 @@ public class Package {
     private double price;
 
     @Column(name = "confirmed_by_user")
-    private Boolean confirmedByUser;
+    private Boolean confirmedByUser = false;
 
     private String departureTime;
 
-    @Column(name = "out_tracking-id")
+    @Column(name = "out_tracking_id")
     private String outTrackingId;
 
     public Package() {
