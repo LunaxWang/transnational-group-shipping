@@ -3,12 +3,11 @@ package com.example.transnationalgroupshipping.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "telephone"))
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
 public class User {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nickname;
+    private String username;
     private String password;
     private String telephone;
     private String role;
@@ -17,23 +16,15 @@ public class User {
 
     }
 
-    public User(String nickname, String password, String telephone, String role) {
-        this.nickname = nickname;
+    public User(String username, String password, String telephone, String role) {
+        this.username = username;
         this.password = password;
         this.telephone = telephone;
         this.role = role;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNickname() {
-        return nickname;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
@@ -44,8 +35,8 @@ public class User {
         this.password = password;
     }
 
-    public void setNickname(String nickName) {
-        this.nickname = nickName;
+    public void setUsername(String nickName) {
+        this.username = nickName;
     }
 
     public String getTelephone() {

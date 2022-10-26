@@ -28,19 +28,19 @@ public class UserController {
         return userRepository.save(user);
     }
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id){
-        User user = userRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("User not exist with id: " + id) );
+    @GetMapping("/users/{username}")
+    public ResponseEntity<User> getUserByName(@PathVariable String username){
+        User user = userRepository.findById(username)
+                .orElseThrow(()->new RuntimeException("User not exist with id: " + username) );
         return ResponseEntity.ok(user);
     }
 
-    @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userNewVersion){
-        User user = userRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("User not exist with id: " + id) );
-        if (userNewVersion.getNickname() != null){
-            user.setNickname(userNewVersion.getNickname());
+    @PutMapping("/users/{username}")
+    public ResponseEntity<User> updateUser(@PathVariable String username, @RequestBody User userNewVersion){
+        User user = userRepository.findById(username)
+                .orElseThrow(()->new RuntimeException("User not exist with name: " + username) );
+        if (userNewVersion.getUsername() != null){
+            user.setUsername(userNewVersion.getUsername());
         }
         if (userNewVersion.getPassword() != null){
             user.setPassword(userNewVersion.getPassword());
@@ -53,14 +53,15 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 
-    @DeleteMapping("users/{id}")
-    public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable Long id){
-        User user = userRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("User not exist with id: " + id) );
+    @DeleteMapping("users/{username}")
+    public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable String username){
+        User user = userRepository.findById(username)
+                .orElseThrow(()->new RuntimeException("User not exist with id: " + username) );
         userRepository.delete(user);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted",Boolean.TRUE);
         return ResponseEntity.ok(response);
     }
+
 
 }
