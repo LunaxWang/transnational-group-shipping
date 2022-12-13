@@ -16,24 +16,18 @@ public class Package {
     @Column(name = "in_carrier")
     private String inCarrier;
 
-    @Column(name = "user_id")   //TODO: many to one
-    private long userId;
+    @Column(name = "username")   //TODO: many to one
+    private String username;
 
-    private String address;
-
-    private String postcode;
-
-    @Column(name = "received_by_tgs")
-    private Boolean receivedByTGS;
-
-    private double weight;
-
+    @Column(name = "address_postcode")
+    private String addNPostcode;
+    @Column( columnDefinition="Decimal(10,2) default '100.00'")
+    private double weight = 0.0;
     private String contents;
-
     @Column(name = "shipping_method")
     private String shippingMethod;
-
-    private double price;
+    @Column( columnDefinition="Decimal(10,2) default '100.00'")
+    private double price = 0.0;
 
     @Column(name = "confirmed_by_user")
     private Boolean confirmedByUser = false;
@@ -43,19 +37,21 @@ public class Package {
     @Column(name = "out_tracking_id")
     private String outTrackingId;
 
+    @Column(name = "curr_stage")
+    private int currStage;
+
     public Package() {
     }
 
-    public Package(String inTrackingId, String inCarrier, long userId, String address,
-                   String postcode, Boolean receivedByTGS, double weight, String contents,
+    public Package(String inTrackingId, String inCarrier, String username, String address,
+                   double weight, String contents,
                    String shippingMethod, double price, Boolean confirmedByUser,
                    String departureTime, String outTrackingId) {
         this.inTrackingId = inTrackingId;
         this.inCarrier = inCarrier;
-        this.userId = userId;
-        this.address = address;
-        this.postcode = postcode;
-        this.receivedByTGS = receivedByTGS;
+        this.username = username;
+        this.addNPostcode = address;
+
         this.weight = weight;
         this.contents = contents;
         this.shippingMethod = shippingMethod;
@@ -63,6 +59,7 @@ public class Package {
         this.confirmedByUser = confirmedByUser;
         this.departureTime = departureTime;
         this.outTrackingId = outTrackingId;
+        this.currStage = 1;
     }
 
     public long getId() {
@@ -89,36 +86,20 @@ public class Package {
         this.inCarrier = inCarrier;
     }
 
-    public long getUserId() {
-        return userId;
+    public String getUserName() {
+        return username;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getAddress() {
-        return address;
+    public String getAddNPostcode() {
+        return addNPostcode;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
-    public Boolean getReceivedByTGS() {
-        return receivedByTGS;
-    }
-
-    public void setReceivedByTGS(Boolean receivedByTGS) {
-        this.receivedByTGS = receivedByTGS;
+    public void setAddNPostcode(String address) {
+        this.addNPostcode = address;
     }
 
     public double getWeight() {
@@ -175,5 +156,13 @@ public class Package {
 
     public void setOutTrackingId(String outTrackingId) {
         this.outTrackingId = outTrackingId;
+    }
+
+    public int getCurrStage() {
+        return currStage;
+    }
+
+    public void setCurrStage(int currStage) {
+        this.currStage = currStage;
     }
 }
